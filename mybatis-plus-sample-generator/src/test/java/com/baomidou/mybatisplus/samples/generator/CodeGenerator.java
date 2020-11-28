@@ -36,12 +36,12 @@ public class CodeGenerator {
             .split(",");
 
     // 数据库
-    private static String DB_URL = "jdbc:mysql://10.60.160.30:3306/shggs?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8";
+    private static String DB_URL = "jdbc:mysql://localhost:3306/shggs?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8";
     private static DbType DB_TYPE = DbType.MYSQL;
     private static String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static String DB_SCHEMA = "shggs";
     private static String DB_USER_NAME = "root";
-    private static String DB_PASSWORD = "sg123456";
+    private static String DB_PASSWORD = "123456";
 
     // 输出路径
     private static String OUTPUT_PATH = "C:\\working\\idea project\\gushou-data-api\\src\\main";
@@ -78,8 +78,7 @@ public class CodeGenerator {
     // 生成的实体类尾缀  例如: UserEntity
     private static String Entity_SUFFIX = "Entity";
 
-    @Test
-    public  void main(){
+    public static void main(String args[]){
 
         // 全局配置
         GlobalConfig globalConfig = globalConfig();
