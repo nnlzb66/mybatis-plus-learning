@@ -66,7 +66,7 @@ public class CodeGenerator {
 
     // 注释掉模板表示不生成该类模板
     static{
-//        templates.put("CONTROLLER_TEMPLATE", "templates/controller.java.ftl");
+        templates.put("CONTROLLER_TEMPLATE", "templates/controller.java.ftl");
         templates.put("SERVICE_TEMPLATE", "templates/service.java.ftl");
         templates.put("SERVICE_IMPL_TEMPLATE", "templates/serviceImpl.java.ftl");
         templates.put("ENTITY_TEMPLATE", "templates/entity.java.ftl");

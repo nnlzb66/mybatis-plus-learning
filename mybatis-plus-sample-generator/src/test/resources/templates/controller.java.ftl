@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.alibaba.fastjson.JSON;
 
 <#if restControllerStyle>
 <#else>
@@ -55,50 +56,70 @@ public class ${table.controllerName} {
         @ApiImplicitParam(name = "sort", value = "排序方式排序[true:正序; false:倒序]", dataType = "Boolean"),
         @ApiImplicitParam(name = "sortName", value = "排序字段,参照返回字段", dataType = "String")})
     @PostMapping(value = "/page")
-    public  Object list(@Valid @RequestBody ${entity} param) {
-
-        Object data = ${table.serviceName?uncap_first}.page(param);
-        return RetJson.ok(data);
+    public  String list(@Valid @RequestBody ${entity} param) {
+        try{
+            List<${entity}> data = ${table.serviceName?uncap_first}.list(param);
+            return JSON.toJSONString(data);
+        }catch(Exception e){
+            return  e.getMessage();
+        }
     }
 
     @ApiOperation(value = "${table.comment}详情", response = ${entity}.class)
     @GetMapping(value = "/info/{id}")
-    public  Object info(@PathVariable Long id) {
-
-        Object data = ${table.serviceName?uncap_first}.info(id);
-        return RetJson.ok(data);
+    public  String info(@PathVariable Long id) {
+        try{
+            ${entity} data = ${table.serviceName?uncap_first}.info(id);
+            return JSON.toJSONString(data);
+        }catch(Exception e){
+            return  e.getMessage();
+        }
     }
 
     @ApiOperation(value = "${table.comment}新增")
     @PostMapping(value = "/add")
-    public  Object add(@Valid @RequestBody ${entity} param) {
-
-        ${table.serviceName?uncap_first}.add(param);
-        return RetJson.ok();
+    public  String add(@Valid @RequestBody ${entity} param) {
+       try{
+            ${table.serviceName?uncap_first}.add(param);
+            return "发送成功！";
+        }catch(Exception e){
+            return  e.getMessage();
+        }
     }
 
     @ApiOperation(value = "${table.comment}修改")
     @PostMapping(value = "/modify")
     public  Object modify(@Valid @RequestBody ${entity} param) {
-
-        ${table.serviceName?uncap_first}.modify(param);
-        return RetJson.ok();
+       try{
+            ${table.serviceName?uncap_first}.modify(param);
+            return "修改成功！";
+        }catch(Exception e){
+            return  e.getMessage();
+        }
     }
 
     @ApiOperation(value = "${table.comment}删除(单个条目)")
     @GetMapping(value = "/remove/{id}")
     public  Object remove(@PathVariable Long id) {
 
-        ${table.serviceName?uncap_first}.remove(id);
-        return RetJson.ok();
+        try{
+            ${table.serviceName?uncap_first}.remove(id);
+            return "删除成功！";
+        }catch(Exception e){
+            return  e.getMessage();
+        }
+
     }
 
     @ApiOperation(value = "${table.comment}删除(多个条目)")
     @PostMapping(value = "/removes")
     public  Object removes(@Valid @RequestBody List<Long> ids) {
-
-        ${table.serviceName?uncap_first}.removes(ids);
-        return RetJson.ok();
+        try{
+            ${table.serviceName?uncap_first}.removes(ids);
+            return "批量删除成功！";
+        }catch(Exception e){
+            return  e.getMessage();
+        }
     }
 
 }
